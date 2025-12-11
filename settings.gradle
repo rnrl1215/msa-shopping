@@ -1,0 +1,6 @@
+rootProject.name = 'msa.shopping'
+
+include 'orderService'
+include 'paymentService'
+include 'shippingService'
+include 'commonService'
