@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: my-mysql-container
+    restart: unless-stopped
+    environment:
+      # 루트 비밀번호는 필수입니다.
+      MYSQL_ROOT_PASSWORD: root_password
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      # 데이터 영속성을 위한 볼륨
+      - mysql-data:/var/lib/mysql
+
+      # 💡 핵심: 초기화 스크립트 폴더를 컨테이너의 초기화 디렉터리에 매핑
+      - ./mysql/init:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql-data:
