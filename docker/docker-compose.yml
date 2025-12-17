@@ -30,7 +30,6 @@ services:
     image: wurstmeister/zookeeper:3.4.6
     ports:
       - "2181:2181"
-      -
   # Kafka 설정
   kafka:
     image: wurstmeister/kafka
@@ -44,3 +43,7 @@ services:
       KAFKA_CREATE_TOPICS: "order-events,payment-events,delivery-events"
     depends_on:
       - zookeeper
+
+# 💡 이 부분이 누락되어 에러가 발생했습니다!
+volumes:
+  mysql-data:
