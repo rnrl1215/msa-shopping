@@ -1,0 +1,9 @@
+${AnsiColor.BRIGHT_MAGENTA}   ___                __                ______                        _
+${AnsiColor.MAGENTA} .'   `.             |  ]             .' ____ \                      (_)
+${AnsiColor.BRIGHT_CYAN}/  .-.  \_ .--.  .--.| | .---.  _ .--.| (___ \_|.---.  _ .--. _   __ __   .---. .---.
+${AnsiColor.CYAN}| |   | [ `/'`\] /'`\' |/ /__\\[ `/'`\]_.____`./ /__\\[ `/'`\| \ [  |  | / /'`\] /__\\
+${AnsiColor.BRIGHT_BLUE}\  `-'  /| |   | \__/  || \__., | |   | \____) | \__., | |    \ \/ / | | | \__.| \__.,
+${AnsiColor.BLUE} `.___.'[___]   '.__.;__]'.__.'[___]   \______.''.__.'[___]    \__/ [___]'.___.''.__.'
+${AnsiStyle.NORMAL}
+
+${AnsiColor.CYAN} :: Spring Boot :: ${spring.application.name}  ${spring-boot.version} ${AnsiColor.BRIGHT_WHITE}

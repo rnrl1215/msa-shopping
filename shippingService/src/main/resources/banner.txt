@@ -1,0 +1,8 @@
+${AnsiColor.BRIGHT_MAGENTA}   ___                                     _      ______                        _
+${AnsiColor.MAGENTA}  |_  |                                   | |   .' ____ \                      (_)
+${AnsiColor.BRIGHT_CYAN}    | |_ .--.  .--.  _ .--.  _ .--.  .---.  | |_  | (___ \_|.---.  _ .--. _   __ __   .---. .---.
+${AnsiColor.CYAN}    | | [ `/'`\] /'`\' [ `.-. |[ `.-. |/ /__\\ | __|  _.____`./ /__\\[ `/'`\| \ [  |  | / /'`\] /__\\
+${AnsiColor.BRIGHT_BLUE}   _| |_ | |   | \__/  || | | | | | | || \__., | |_  | \____) | \__., | |    \ \/ / | | | \__.| \__.,
+${AnsiColor.BLUE}  |_____|[___]   '.__.;__[___||__][___||__]'.__.' \__|  \______.''.__.'[___]    \__/ [___]'.___.''.__.'
+${AnsiStyle.NORMAL}
+${AnsiBackground.BRIGHT_YELLOW}${AnsiColor.BLACK}${AnsiStyle.BOLD}  PAYMENT-SERVICE  ${AnsiStyle.NORMAL} ${AnsiColor.BRIGHT_BLACK} Running on Spring Boot ${spring-boot.version} ${AnsiStyle.NORMAL}
