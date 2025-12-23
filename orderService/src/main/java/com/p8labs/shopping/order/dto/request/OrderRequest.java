@@ -1,4 +1,4 @@
-package com.p8labs.shopping.order.dto;
+package com.p8labs.shopping.order.dto.request;
 
 import lombok.Getter;
 

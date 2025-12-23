@@ -1,7 +1,9 @@
 package com.p8labs.shopping.order.service;
 
+import com.p8labs.shopping.common.exception.CommonServiceException;
 import com.p8labs.shopping.common.kafka.dto.ShoppingEventDto;
 import com.p8labs.shopping.order.dto.ProductDto;
+import com.p8labs.shopping.order.enums.OrderExceptionEnum;
 import com.p8labs.shopping.order.mq.kafka.ProducerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -21,12 +23,15 @@ public class OrderOrchestrationServiceImpl {
         try {
             List<ProductDto> findProducts = findProducts(productIds);
             Long orderId = orderService.save(userSeq, findProducts);
+            if (orderId != null) {
+                throw new IllegalArgumentException("tsete");
+            }
 
             ShoppingEventDto dto = new ShoppingEventDto("ORDER", orderId);
-            producerService.sendMessage("order-event-process",dto);
+            producerService.sendMessage("order-event-process", dto);
             return orderId;
         } catch (Exception e) {
-            return null;
+            throw new CommonServiceException(OrderExceptionEnum.ORDER_REQUEST_FAIL);
         }
     }
 

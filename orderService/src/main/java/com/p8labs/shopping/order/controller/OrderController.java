@@ -1,10 +1,13 @@
 package com.p8labs.shopping.order.controller;
 
-import com.p8labs.shopping.order.dto.OrderRequest;
-import com.p8labs.shopping.order.dto.ProductDto;
+import com.p8labs.shopping.common.respose.dto.CommonDataResponseDto;
+import com.p8labs.shopping.common.respose.dto.CommonResponseDto;
+import com.p8labs.shopping.order.dto.request.OrderRequest;
+import com.p8labs.shopping.order.dto.response.OrderResponse;
 import com.p8labs.shopping.order.service.OrderOrchestrationServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,13 +21,15 @@ public class OrderController {
 
     private final OrderOrchestrationServiceImpl orderOrchestrationService;
 
-    @GetMapping
-    public void orderProducts(
+    @PostMapping
+    public ResponseEntity<CommonResponseDto> orderProducts(
             @RequestBody OrderRequest orderRequest
     ) {
-
         Long userSeq = orderRequest.getUserSeq();
         List<Long> productIds = orderRequest.getProductIds();
-        Long order = orderOrchestrationService.createOrder(userSeq, productIds);
+        Long orderId = orderOrchestrationService.createOrder(userSeq, productIds);
+
+        OrderResponse orderResponse = new OrderResponse(orderId);
+        return ResponseEntity.ok(new CommonDataResponseDto<>(orderResponse));
     }
 }
