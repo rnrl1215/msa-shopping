@@ -1,4 +1,4 @@
-package com.p8labs.shopping.common.ErrorHandler;
+package com.p8labs.shopping.common.errorhandler;
 
 import com.p8labs.shopping.common.enums.exception.CommonExceptionEnum;
 import com.p8labs.shopping.common.exception.CommonServiceException;
