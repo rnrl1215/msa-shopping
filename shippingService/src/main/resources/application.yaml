@@ -13,7 +13,7 @@ spring:
     active: local
 
   datasource:
-    url: jdbc:mysql://localhost:3306/shopping_shipping
+    url: jdbc:mysql://localhost:3308/shopping_shipping
     username: delivery_user
     password: user123#@!
     driver-class-name: com.mysql.jdbc.Driver

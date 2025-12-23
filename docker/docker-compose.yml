@@ -1,17 +1,51 @@
 version: '3.8'
 
 services:
-  mysql_db:
+  mysql_order:
     image: mysql:8.0
-    container_name: my-mysql-container
+    container_name: mysql-shopping-order-container
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root_password
     ports:
       - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - mysql-order-data:/var/lib/mysql
+      - ./mysql/init/order:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql_pay:
+    image: mysql:8.0
+    container_name: mysql-shopping-pay-container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-pay-data:/var/lib/mysql
+      - ./mysql/init/pay:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql_shipment:
+    image: mysql:8.0
+    container_name: mysql-shopping-shipment-container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-shipment-data:/var/lib/mysql
+      - ./mysql/init/shipment:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
       interval: 10s
@@ -43,4 +77,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 volumes:
-  mysql-data:
+  mysql-order-data:
+  mysql-pay-data:
+  mysql-shipment-data:

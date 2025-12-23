@@ -13,7 +13,7 @@ spring:
     active: local
 
   datasource:
-    url: jdbc:mysql://localhost:3306/shopping_payment
+    url: jdbc:mysql://localhost:3307/shopping_payment
     username: pay_user
     password: user123#@!
     driver-class-name: com.mysql.jdbc.Driver
