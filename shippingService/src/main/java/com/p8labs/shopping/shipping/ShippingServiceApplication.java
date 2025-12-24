@@ -1,10 +1,11 @@
 package com.p8labs.shopping.shipping;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ShippingService {
+public class ShippingServiceApplication {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(ShippingServiceApplication.class, args);
     }
 }

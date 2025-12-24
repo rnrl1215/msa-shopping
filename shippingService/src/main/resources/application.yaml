@@ -1,0 +1,34 @@
+server:
+  port: 28080
+  shutdown: graceful
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+
+spring:
+  application:
+    name: p8labs-order-api
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/shopping_shipping
+    username: delivery_user
+    password: user123#@!
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        #Output as one line
+        format_sql: false
+        default_batch_fetch_size: 500
+        dialect: org.hibernate.dialect.MySQLDialect
+        jdbc:
+          batch_size: 50
+        order_updates: true
+        order_inserts: true
+    open-in-view: false

@@ -1,0 +1,47 @@
+server:
+  port: 38080
+  shutdown: graceful
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+
+spring:
+  application:
+    name: p8labs-order-api
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/shopping_payment
+    username: payment_user
+    password: user123#@!
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        #Output as one line
+        format_sql: false
+        default_batch_fetch_size: 500
+        dialect: org.hibernate.dialect.MySQLDialect
+        jdbc:
+          batch_size: 50
+        order_updates: true
+        order_inserts: true
+    open-in-view: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest # 처음부터 메시지를 읽을지 설정
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
