@@ -1,7 +1,7 @@
 package com.p8labs.shopping.order.controller;
 
-import com.p8labs.shopping.common.respose.dto.CommonDataResponseDto;
-import com.p8labs.shopping.common.respose.dto.CommonResponseDto;
+import com.p8labs.shopping.common.response.dto.CommonDataResponseDto;
+import com.p8labs.shopping.common.response.dto.CommonResponseDto;
 import com.p8labs.shopping.order.dto.request.OrderRequest;
 import com.p8labs.shopping.order.dto.response.OrderResponse;
 import com.p8labs.shopping.order.service.OrderOrchestrationServiceImpl;

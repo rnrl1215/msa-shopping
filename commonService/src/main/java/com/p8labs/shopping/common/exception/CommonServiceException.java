@@ -1,6 +1,6 @@
 package com.p8labs.shopping.common.exception;
 
-import com.p8labs.shopping.common.respose.CommonErrorMessage;
+import com.p8labs.shopping.common.response.CommonErrorMessage;
 import lombok.Getter;
 
 @Getter

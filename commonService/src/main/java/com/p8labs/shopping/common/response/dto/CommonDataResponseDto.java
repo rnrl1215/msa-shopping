@@ -1,4 +1,4 @@
-package com.p8labs.shopping.common.respose.dto;
+package com.p8labs.shopping.common.response.dto;
 
 import com.p8labs.shopping.common.enums.message.CommonResponse;
 import lombok.Getter;

@@ -2,8 +2,8 @@ package com.p8labs.shopping.common.errorhandler;
 
 import com.p8labs.shopping.common.enums.exception.CommonExceptionEnum;
 import com.p8labs.shopping.common.exception.CommonServiceException;
-import com.p8labs.shopping.common.respose.CommonErrorMessage;
-import com.p8labs.shopping.common.respose.dto.CommonErrorResponseDto;
+import com.p8labs.shopping.common.response.CommonErrorMessage;
+import com.p8labs.shopping.common.response.dto.CommonErrorResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class CommonErrorHandler {
 
     @ExceptionHandler({CommonServiceException.class})
     public ResponseEntity<CommonErrorResponseDto> handleCommonServiceException(CommonServiceException ex) {
-        log.error(ex.getMessage(), ex);
+        log.warn(ex.getMessage(), ex);
 
         if (StringUtils.hasText(ex.getErrorDetailMessage())) {
             log.error("Detail Error Message : {}", ex.getErrorDetailMessage(), ex);
@@ -34,11 +34,11 @@ public class CommonErrorHandler {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<CommonErrorResponseDto> handleMethodArgumentNotValidException(HttpRequestMethodNotSupportedException ex) {
+    public ResponseEntity<CommonErrorResponseDto> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
         log.error("Validation Exception: {}", ex.getMessage());
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(new CommonErrorResponseDto(HttpStatus.BAD_REQUEST, ex.getMessage() ,""));
+                .status(ex.getStatusCode())
+                .body(new CommonErrorResponseDto(ex.getStatusCode(), ex.getMessage() ,""));
     }
 
     @ExceptionHandler({Exception.class})

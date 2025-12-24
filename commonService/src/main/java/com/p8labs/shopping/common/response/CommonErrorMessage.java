@@ -1,4 +1,4 @@
-package com.p8labs.shopping.common.respose;
+package com.p8labs.shopping.common.response;
 
 import org.springframework.http.HttpStatus;
 
