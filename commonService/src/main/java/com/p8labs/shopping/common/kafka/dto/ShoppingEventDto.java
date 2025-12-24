@@ -5,15 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+import java.math.BigDecimal;
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
 public class ShoppingEventDto {
     private String eventName;
-    private Long orderId;
+    private Long orderSeq;
+    private Long userSeq;
 
-    public ShoppingEventDto(String eventName, Long orderId) {
+    public ShoppingEventDto(String eventName,
+                            Long orderId,
+                            Long userId) {
         this.eventName = eventName;
-        this.orderId = orderId;
+        this.orderSeq = orderId;
+        this.userSeq = userId;
+    }
+
+    public void updateEventName(String eventName) {
+        this.eventName = eventName;
     }
 }
