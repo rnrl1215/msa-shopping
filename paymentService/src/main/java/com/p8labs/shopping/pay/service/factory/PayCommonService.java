@@ -13,7 +13,7 @@ public abstract class PayCommonService implements PayService {
 
     @Override
     public String executePayment(Long userSeq, String desc, BigDecimal bigDecimal) {
-        log.info("결제 시작 PAY TYPE: {} userSeq: {} dese: {}", getPayType(), userSeq,  desc);
+        log.info("결제 시작 PAY TYPE: {} userSeq: {} desc: {}", getPayType(), userSeq,  desc);
         doProcess(userSeq, desc, bigDecimal);
         log.info("결제 종료");
         return UUID.randomUUID().toString();
