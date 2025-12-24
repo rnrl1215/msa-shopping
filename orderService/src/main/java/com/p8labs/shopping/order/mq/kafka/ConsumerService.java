@@ -17,9 +17,11 @@ public class ConsumerService {
     @KafkaListener(topics = "order-event-topic", groupId = "order-event-process")
     public void consume(ShoppingEventDto dto) {
         log.info("주문 서비스 수신된 메시지: {}", dto);
-        if (dto.getEventName().equalsIgnoreCase("PAYMENT_COMPLETED")) {
+        if ("PAYMENT_COMPLETED".equalsIgnoreCase(dto.getEventName())) {
             orderOrchestrationService.successOrder(dto.getUserSeq(), dto.getOrderSeq());
-        } else {
+        } else if("PAYMENT_FAILED".equalsIgnoreCase(dto.getEventName())) {
+            orderOrchestrationService.cancelOrder(dto.getUserSeq(), dto.getOrderSeq());
+        } else if ("SHIPMENT_COMPLETED".equalsIgnoreCase(dto.getEventName())) {
             orderOrchestrationService.cancelOrder(dto.getUserSeq(), dto.getOrderSeq());
         }
     }
