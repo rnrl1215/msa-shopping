@@ -21,7 +21,7 @@ public class ConsumerService {
             orderOrchestrationService.successOrder(dto.getUserId(), dto.getOrderId());
         } else if("PAYMENT_FAILED".equalsIgnoreCase(dto.getEventName())) {
             orderOrchestrationService.cancelOrder(dto.getUserId(), dto.getOrderId());
-        } else if ("SHIPMENT_REQUEST".equalsIgnoreCase(dto.getEventName())) {
+        } else if ("SHIPMENT_REQUEST_COMPLETED".equalsIgnoreCase(dto.getEventName())) {
             orderOrchestrationService.successRequestShipping(dto.getUserId(), dto.getOrderId());
         }
     }

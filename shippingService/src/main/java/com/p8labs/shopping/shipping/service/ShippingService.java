@@ -21,6 +21,7 @@ public class ShippingService {
         try {
             String shippingTrId = createShippingId(shippingEventDto.getOrderId(), shippingEventDto.getUserId());
             log.info("배송 요청 완료");
+            shippingEventDto.updateEventName("SHIPMENT_REQUEST_COMPLETED");
             producerService.sendMessage( "order-event-topic", shippingEventDto);
             return shippingTrId;
         } catch (Exception e) {
