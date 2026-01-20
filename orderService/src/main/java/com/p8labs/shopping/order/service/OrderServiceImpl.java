@@ -16,7 +16,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Long save(Long userSeq, List<ProductDto> orderProducts) {
+    public Long save(Long userId, List<ProductDto> orderProducts) {
         if (Math.random() < 0.5) {
             throw new IllegalArgumentException("주문 저장 실패");
         }
@@ -25,31 +25,31 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Long cancelOrder(Long userSeq, Long orderSeq) {
-        if (userSeq == null || orderSeq == null) {
+    public Long cancelOrder(Long userId, Long orderId) {
+        if (userId == null || orderId == null) {
             throw new IllegalArgumentException("주문 취소 실패");
         }
 
-        updateOrderStatus(userSeq, orderSeq, OrderType.CANCEL);
-        log.info("ORDER CANCEL userSeq: {} orderSeq: {}", userSeq, orderSeq);
-        return orderSeq;
+        updateOrderStatus(userId, orderId, OrderType.CANCEL);
+        log.info("ORDER CANCEL userId: {} orderId: {}", userId, orderId);
+        return orderId;
     }
 
     @Transactional
     @Override
-    public Long doneOrder(Long userSeq, Long orderSeq) {
-        if (userSeq == null || orderSeq == null) {
+    public Long doneOrder(Long userId, Long orderId) {
+        if (userId == null || orderId == null) {
             throw new IllegalArgumentException("주문 취소 실패");
         }
 
-        updateOrderStatus(userSeq, orderSeq, OrderType.DONE);
-        log.info("ORDER SUCCESS userSeq: {} orderSeq: {}", userSeq, orderSeq);
-        return orderSeq;
+        updateOrderStatus(userId, orderId, OrderType.DONE);
+        log.info("ORDER SUCCESS userId: {} orderId: {}", userId, orderId);
+        return orderId;
     }
 
     @Transactional
-    public Long updateOrderStatus(Long userSeq, Long orderSeq, OrderType orderType) {
-        log.info("ORDER UPDATE userSeq: {} orderSeq: {} orderType: {}", userSeq, orderSeq, orderType);
-        return orderSeq;
+    public Long updateOrderStatus(Long userId, Long orderId, OrderType orderType) {
+        log.info("ORDER UPDATE userId: {} orderId: {} orderType: {}", userId, orderId, orderType);
+        return orderId;
     }
 }

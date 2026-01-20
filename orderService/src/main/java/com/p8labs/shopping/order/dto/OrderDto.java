@@ -6,11 +6,11 @@ import java.util.*;
 @Getter
 public class OrderDto {
     private Long id;
-    private final Long userSeq;
+    private final Long userId;
     private final List<ProductDto> orderProducts;
 
-    public OrderDto(Long userSeq, List<ProductDto> orderProducts) {
-        this.userSeq = userSeq;
+    public OrderDto(Long userId, List<ProductDto> orderProducts) {
+        this.userId = userId;
         this.orderProducts = orderProducts;
     }
 }

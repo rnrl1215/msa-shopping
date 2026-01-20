@@ -24,7 +24,7 @@ public class ConsumerService {
         try {
             if (dto instanceof ShoppingPayEventDto shoppingEventDto) {
                 String payTrId = payOrchestrationService.pay(
-                        shoppingEventDto.getUserSeq(),
+                        shoppingEventDto.getUserId(),
                         shoppingEventDto.getPaymentDesc(),
                         shoppingEventDto.getOrderAmount());
                 shoppingEventDto.updatePayTrId(payTrId);

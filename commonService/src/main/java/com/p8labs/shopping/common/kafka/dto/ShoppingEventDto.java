@@ -12,15 +12,15 @@ import java.math.BigDecimal;
 @ToString
 public class ShoppingEventDto {
     private String eventName;
-    private Long orderSeq;
-    private Long userSeq;
+    private Long orderId;
+    private Long userId;
 
     public ShoppingEventDto(String eventName,
                             Long orderId,
                             Long userId) {
         this.eventName = eventName;
-        this.orderSeq = orderId;
-        this.userSeq = userId;
+        this.orderId = orderId;
+        this.userId = userId;
     }
 
     public void updateEventName(String eventName) {

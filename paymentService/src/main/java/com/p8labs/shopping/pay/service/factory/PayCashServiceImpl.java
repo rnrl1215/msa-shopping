@@ -16,7 +16,7 @@ public class PayCashServiceImpl extends PayCommonService {
     }
 
     @Override
-    public boolean doProcess(Long userSeq, String desc, BigDecimal bigDecimal) {
+    public boolean doProcess(Long userId, String desc, BigDecimal bigDecimal) {
         return false;
     }
 }

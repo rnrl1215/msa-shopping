@@ -48,6 +48,10 @@ dependencies {
 	// JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	// JSON
+	implementation 'org.springframework.boot:spring-boot-starter-json'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.17.2'
 }
 
 // Querydsl 설정부 >> gradle build 와 intellij ide build 불편함 해소를 위해 추가적인 설정

@@ -12,12 +12,12 @@ import java.util.UUID;
 public abstract class PayCommonService implements PayService {
 
     @Override
-    public String executePayment(Long userSeq, String desc, BigDecimal bigDecimal) {
-        log.info("결제 시작 PAY TYPE: {} userSeq: {} desc: {}", getPayType(), userSeq,  desc);
-        doProcess(userSeq, desc, bigDecimal);
+    public String executePayment(Long userId, String desc, BigDecimal bigDecimal) {
+        log.info("결제 시작 PAY TYPE: {} userId: {} desc: {}", getPayType(), userId,  desc);
+        doProcess(userId, desc, bigDecimal);
         log.info("결제 종료");
         return UUID.randomUUID().toString();
     }
 
-    public abstract boolean doProcess(Long userSeq, String desc, BigDecimal amount);
+    public abstract boolean doProcess(Long userId, String desc, BigDecimal amount);
 }

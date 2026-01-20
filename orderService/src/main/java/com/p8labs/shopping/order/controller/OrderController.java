@@ -25,9 +25,9 @@ public class OrderController {
     public ResponseEntity<CommonResponseDto> orderProducts(
             @RequestBody OrderRequest orderRequest
     ) {
-        Long userSeq = orderRequest.getUserSeq();
+        Long userId = orderRequest.getUserId();
         List<Long> productIds = orderRequest.getProductIds();
-        Long orderId = orderOrchestrationService.createOrder(userSeq, productIds);
+        Long orderId = orderOrchestrationService.createOrder(userId, productIds);
 
         OrderResponse orderResponse = new OrderResponse(orderId);
         return ResponseEntity.ok(new CommonDataResponseDto<>(orderResponse));

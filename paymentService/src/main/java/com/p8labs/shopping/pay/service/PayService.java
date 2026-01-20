@@ -6,5 +6,5 @@ import java.math.BigDecimal;
 
 public interface PayService {
     PayType getPayType();
-    String executePayment(Long userSeq, String desc, BigDecimal bigDecimal);
+    String executePayment(Long userId, String desc, BigDecimal bigDecimal);
 }

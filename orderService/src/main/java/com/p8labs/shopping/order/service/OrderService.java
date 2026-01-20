@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 public interface OrderService {
-    Long save(Long userSeq, List<ProductDto> orderProducts);
-    Long cancelOrder(Long userSeq, Long orderSeq);
-    Long doneOrder(Long userSeq, Long orderSeq);
-    Long updateOrderStatus(Long userSeq, Long orderSeq, OrderType orderType);
+    Long save(Long userId, List<ProductDto> orderProducts);
+    Long cancelOrder(Long userId, Long orderId);
+    Long doneOrder(Long userId, Long orderId);
+    Long updateOrderStatus(Long userId, Long orderId, OrderType orderType);
 }

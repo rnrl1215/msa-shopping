@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 public class PayOrchestrationService {
     private final PayFactory payFactory;
 
-    public String pay(Long userSeq, String desc, BigDecimal amount) {
+    public String pay(Long userId, String desc, BigDecimal amount) {
         try {
             PayService payService = payFactory.getPayService(PayType.CASH);
-            return payService.executePayment(userSeq, desc, amount);
+            return payService.executePayment(userId, desc, amount);
         } catch (Exception e) {
             return "";
         }

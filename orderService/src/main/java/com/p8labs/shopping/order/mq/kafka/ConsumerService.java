@@ -18,11 +18,11 @@ public class ConsumerService {
     public void consume(ShoppingEventDto dto) {
         log.info("주문 서비스 수신된 메시지: {}", dto);
         if ("PAYMENT_COMPLETED".equalsIgnoreCase(dto.getEventName())) {
-            orderOrchestrationService.successOrder(dto.getUserSeq(), dto.getOrderSeq());
+            orderOrchestrationService.successOrder(dto.getUserId(), dto.getOrderId());
         } else if("PAYMENT_FAILED".equalsIgnoreCase(dto.getEventName())) {
-            orderOrchestrationService.cancelOrder(dto.getUserSeq(), dto.getOrderSeq());
-        } else if ("SHIPMENT_COMPLETED".equalsIgnoreCase(dto.getEventName())) {
-            orderOrchestrationService.cancelOrder(dto.getUserSeq(), dto.getOrderSeq());
+            orderOrchestrationService.cancelOrder(dto.getUserId(), dto.getOrderId());
+        } else if ("SHIPMENT_REQUEST".equalsIgnoreCase(dto.getEventName())) {
+            orderOrchestrationService.successRequestShipping(dto.getUserId(), dto.getOrderId());
         }
     }
 }

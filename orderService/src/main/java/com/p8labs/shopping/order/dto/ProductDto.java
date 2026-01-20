@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public class ProductDto {
     private Long id;
-    private Long userSeq;
+    private Long userId;
     private Long productId;
     private int orderCount;
 
-    public ProductDto(Long userSeq, Long productId, int orderCount) {
-        this.userSeq = userSeq;
+    public ProductDto(Long userId, Long productId, int orderCount) {
+        this.userId = userId;
         this.productId = productId;
         this.orderCount = orderCount;
     }

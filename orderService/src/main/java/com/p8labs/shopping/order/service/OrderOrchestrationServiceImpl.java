@@ -1,5 +1,6 @@
 package com.p8labs.shopping.order.service;
 
+import com.p8labs.shopping.common.enums.eventtype.CommonOrderType;
 import com.p8labs.shopping.common.exception.CommonServiceException;
 import com.p8labs.shopping.common.kafka.dto.ShoppingEventDto;
 import com.p8labs.shopping.common.kafka.dto.ShoppingPayEventDto;
@@ -24,12 +25,12 @@ public class OrderOrchestrationServiceImpl {
     private final OrderService orderService;
     private final ProducerService producerService;
 
-    public Long createOrder(Long userSeq, List<Long> productIds) {
+    public Long createOrder(Long userId, List<Long> productIds) {
         try {
             List<ProductDto> findProducts = findProducts(productIds);
-            Long orderId = orderService.save(userSeq, findProducts);
+            Long orderId = orderService.save(userId, findProducts);
 
-            ShoppingEventDto dto = new ShoppingPayEventDto("ORDER_CREATED", orderId, userSeq, "상품 결재", BigDecimal.TEN);
+            ShoppingEventDto dto = new ShoppingPayEventDto(CommonOrderType.ORDER_CREATED.name(), orderId, userId, "상품 결재", BigDecimal.TEN);
             producerService.sendMessage("payment-event-topic", dto);
             return orderId;
         } catch (Exception e) {
@@ -41,11 +42,22 @@ public class OrderOrchestrationServiceImpl {
         return Collections.EMPTY_LIST;
     }
 
-    public void cancelOrder(Long userSeq, Long orderSeq) {
-        orderService.updateOrderStatus(userSeq, orderSeq, OrderType.CANCEL);
+    public void cancelOrder(Long userId, Long orderId) {
+        orderService.updateOrderStatus(userId, orderId, OrderType.CANCEL);
     }
 
-    public void successOrder(Long userSeq, Long orderSeq) {
-        orderService.updateOrderStatus(userSeq, orderSeq, OrderType.DONE);
+    public void successOrder(Long userSeq, Long orderId) {
+        orderService.updateOrderStatus(userSeq, orderId, OrderType.DONE);
+
+        ShoppingEventDto dto = new ShoppingPayEventDto(CommonOrderType.ORDER_COMPLETED.name(), orderId, userSeq, "상품 결재", BigDecimal.TEN);
+        producerService.sendMessage("shipment-event-topic", dto);
+    }
+
+    public void successRequestShipping(Long userSeq, Long orderId) {
+        orderService.updateOrderStatus(userSeq, orderId, OrderType.SHIPPING);
+    }
+
+    public void successShipping(Long userSeq, Long orderId) {
+        orderService.updateOrderStatus(userSeq, orderId, OrderType.SHIPPING_DONE);
     }
 }
