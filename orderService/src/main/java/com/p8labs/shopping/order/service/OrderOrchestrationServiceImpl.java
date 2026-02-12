@@ -46,7 +46,7 @@ public class OrderOrchestrationServiceImpl {
         orderService.updateOrderStatus(userId, orderId, OrderType.CANCEL);
     }
 
-    public void successOrder(Long userSeq, Long orderId) {
+    public void successOrder(Long userSeq, Long orderId, String payTrId) {
         orderService.updateOrderStatus(userSeq, orderId, OrderType.DONE);
 
         ShoppingEventDto dto = new ShoppingPayEventDto(CommonOrderType.ORDER_COMPLETED.name(), orderId, userSeq, "상품 결재", BigDecimal.TEN);
@@ -55,9 +55,5 @@ public class OrderOrchestrationServiceImpl {
 
     public void successRequestShipping(Long userSeq, Long orderId) {
         orderService.updateOrderStatus(userSeq, orderId, OrderType.SHIPPING);
-    }
-
-    public void successShipping(Long userSeq, Long orderId) {
-        orderService.updateOrderStatus(userSeq, orderId, OrderType.SHIPPING_DONE);
     }
 }

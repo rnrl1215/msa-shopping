@@ -1,5 +1,6 @@
 package com.p8labs.shopping.pay.mq.kafka;
 
+import com.p8labs.shopping.common.enums.eventtype.CommonOrderType;
 import com.p8labs.shopping.common.kafka.dto.ShoppingEventDto;
 import com.p8labs.shopping.common.kafka.dto.ShoppingPayEventDto;
 import com.p8labs.shopping.pay.service.PayOrchestrationService;
@@ -23,17 +24,22 @@ public class ConsumerService {
         log.info("페이 서비스 수신된 메시지: {}", dto);
         try {
             if (dto instanceof ShoppingPayEventDto shoppingEventDto) {
-                String payTrId = payOrchestrationService.pay(
-                        shoppingEventDto.getUserId(),
-                        shoppingEventDto.getPaymentDesc(),
-                        shoppingEventDto.getOrderAmount());
-                shoppingEventDto.updatePayTrId(payTrId);
 
-                if (StringUtils.hasText(shoppingEventDto.getPayTrId())) {
-                    dto.updateEventName("PAYMENT_COMPLETED");
-                    producerService.sendMessage("order-event-topic", dto);
-                } else {
-                    throw new IllegalArgumentException("결제 실패");
+                if (dto.getEventName().equalsIgnoreCase(CommonOrderType.ORDER_CREATED.name())) {
+                    String payTrId = payOrchestrationService.pay(
+                            shoppingEventDto.getUserId(),
+                            shoppingEventDto.getPaymentDesc(),
+                            shoppingEventDto.getOrderAmount());
+                            shoppingEventDto.updatePayTrId(payTrId);
+
+                    if (StringUtils.hasText(shoppingEventDto.getPayTrId())) {
+                        dto.updateEventName("PAYMENT_COMPLETED");
+                        producerService.sendMessage("order-event-topic", dto);
+                    } else {
+                        throw new IllegalArgumentException("결제 실패");
+                    }
+                } else if (dto.getEventName().equalsIgnoreCase(CommonOrderType.ORDER_CANCELED.name())) {
+                    payOrchestrationService.cancel(dto.getUserId(), dto.getOrderId());
                 }
             }
         } catch (Exception e) {

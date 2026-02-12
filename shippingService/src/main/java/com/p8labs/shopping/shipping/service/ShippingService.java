@@ -25,6 +25,8 @@ public class ShippingService {
             producerService.sendMessage( "order-event-topic", shippingEventDto);
             return shippingTrId;
         } catch (Exception e) {
+            shippingEventDto.updateEventName("SHIPMENT_REQUEST_FAILED");
+            producerService.sendMessage( "order-event-topic", shippingEventDto);
             log.info("배송 요청 실패 {}", e.getMessage());
             throw e;
         }

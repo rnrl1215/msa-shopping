@@ -4,10 +4,12 @@ import com.p8labs.shopping.pay.enums.PayType;
 import com.p8labs.shopping.pay.service.factory.PayFactory;
 import jakarta.transaction.NotSupportedException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PayOrchestrationService {
@@ -20,5 +22,10 @@ public class PayOrchestrationService {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public String cancel(Long userId, Long orderId) {
+        log.info("CANCEL PAY {} {} ", userId, orderId);
+        return "";
     }
 }
